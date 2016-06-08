@@ -131,8 +131,74 @@
           <xsl:apply-templates select="mcp:revisionDate"/>
         </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="mcp:metadataContactInfo"/>
+			<xsl:choose>
+			  <!-- If new record then add current user as creator, IDC as 
+             pointOfContact and remove all processors and originators -->
+				<xsl:when test="/root/env/created">
+					<mcp:metadataContactInfo>
+						<mcp:CI_Responsibility>
+							<mcp:role>
+								<gmd:CI_RoleCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="originator">originator</gmd:CI_RoleCode>
+							</mcp:role>
+							<xsl:call-template name="addCurrentUserAsParty"/>
+						</mcp:CI_Responsibility>
+					</mcp:metadataContactInfo>
+					<mcp:metadataContactInfo>
+      			<mcp:CI_Responsibility>
+         			<mcp:role>
+            		<gmd:CI_RoleCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+         			</mcp:role>
+         			<mcp:party xlink:href="{concat(/root/env/siteURL,'/subtemplate?uuid=urn:marlin.csiro.au:person:125_person_organisation')}"/>
+      			</mcp:CI_Responsibility>
+					</mcp:metadataContactInfo>
+      		<xsl:apply-templates select="mcp:metadataContactInfo[mcp:CI_Responsibility/mcp:role/gmd:CI_RoleCode!='processor' and mcp:CI_Responsibility/mcp:role/gmd:CI_RoleCode!='originator' and mcp:CI_Responsibility/mcp:role/gmd:CI_RoleCode!='pointOfContact']"/>
+				</xsl:when>
+			  <!-- Add current user as processor, then process everything except the 
+				     existing processor which will be excluded from the output
+						 document - this is to ensure that only the latest user is
+						 added as a processor - note: Marlin administrator is excluded from 
+						 this role -->
+				<xsl:otherwise>
+					<xsl:choose>
+						<xsl:when test="/root/env/user/details/record/username!='admin'">
+							<!-- marlin admin does not replace a processor, so add it unless username!='admin' -->
+							<mcp:metadataContactInfo>
+								<mcp:CI_Responsibility>
+									<mcp:role>
+										<gmd:CI_RoleCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="processor">processor</gmd:CI_RoleCode>
+									</mcp:role>
+									<xsl:call-template name="addCurrentUserAsParty"/>
+								</mcp:CI_Responsibility>
+							</mcp:metadataContactInfo>
+      				<xsl:apply-templates select="mcp:metadataContactInfo[mcp:CI_Responsibility/mcp:role/gmd:CI_RoleCode!='processor']"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<!-- marlin admin does not replace a processor, so grab all mcp:metadataContactInfo -->
+      				<xsl:apply-templates select="mcp:metadataContactInfo"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:copy>
+	</xsl:template>
+
+	<!-- ================================================================= -->
+
+	<xsl:template name="addCurrentUserAsParty">
+							<mcp:party>
+								<mcp:CI_Organisation>
+									<mcp:name>
+										<gco:CharacterString><xsl:value-of select="/root/env/user/details/record/organisation"/></gco:CharacterString>
+									</mcp:name>
+									<mcp:individual>
+										<mcp:CI_Individual>
+									  	<mcp:name>
+												<gco:CharacterString><xsl:value-of select="concat(/root/env/user/details/record/surname,', ',/root/env/user/details/record/name)"/></gco:CharacterString>
+									  	</mcp:name>
+										</mcp:CI_Individual>
+									</mcp:individual>
+								</mcp:CI_Organisation>
+							</mcp:party>
 	</xsl:template>
 
 	<!-- ================================================================= -->
@@ -156,6 +222,23 @@
 				</xsl:choose>
 		 </xsl:copy>
 	</xsl:template>
+
+	<!-- ================================================================= -->
+
+	<!-- 
+	<gmd:identifier xlink:title="Marlin Record Number">
+		<gmd:MD_Identifier>
+		<gmd:code>
+			<gco:CharacterString>Marlin Record Number: 14564</gco:CharacterString>
+		</gmd:code>
+		..
+
+		Must not be copied on create/clone
+	-->
+	<xsl:template match="gmd:identifier[starts-with(gmd:MD_Identifier/gmd:code/gco:CharacterString,'Marlin Record Number') and /root/env/created]" priority="10000"/>
+
+	<xsl:template match="gmd:identifier[starts-with(gmd:MD_Identifier/gmd:code/gco:CharacterString,'Anzlic Identifier') and /root/env/created]" priority="10000"/>
+
 
 	<!-- ================================================================= -->
 	
