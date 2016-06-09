@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <strings>
+	<distribution_name>Name</distribution_name>
+	<distribution_version>Version</distribution_version>
+	<notSpecified>Not specified</notSpecified>
+	<coordSystem>Spatial Reference System</coordSystem>
 	<clear>Clear</clear>
 	<contact>Contact</contact>
 	<distributionOnlineInfo>Distribution and On-line Resource(s)</distributionOnlineInfo>
 	<deprecatedTimeStrings>Deprecated - use time elements above</deprecatedTimeStrings>
-	<lineage>Lineage</lineage>
+	<resourceInfo>Resource Info</resourceInfo>
+	<lineage>Statement</lineage>
 	<metadataInfo>Metadata Info</metadataInfo>
 	<referenceSystemInfo>Reference System Info</referenceSystemInfo>
 	<spatialExtentTab>Spatial Extent</spatialExtentTab>
@@ -50,6 +55,10 @@
 	<copyResources>Copy downloadable files?</copyResources>
 
 	<!-- other strings NB Not part of mcp but must be added -->
+	<downloadDataLabel id="data">Data for download</downloadDataLabel>
+	<downloadDataLabel id="other">Other file for download</downloadDataLabel>
+	<downloadDataLabel id="file">File for download</downloadDataLabel>
+	<downloadDataUrl>Data URL</downloadDataUrl>
 	<dataDownload>Data for Download</dataDownload>
 	<datafordownload>Data for download</datafordownload>
 	<dataparam>Data Parameter</dataparam>
@@ -188,4 +197,29 @@
   <add-resource-idHelp>Compose the resource identifier using the catalog URL and the metadata identifier (eg. http://www.organization.org/catalogue/5391bf69-44bc-4ea0-8cc0-6cf6c3bc81ae).</add-resource-idHelp>
   <add-extent-from-geokeywords>Compute extent from keyword</add-extent-from-geokeywords>
   <add-extent-from-geokeywordsHelp>Analyze each keyword of type place and add matching extent.</add-extent-from-geokeywordsHelp>
+
+	<resourceContactInfo>Resource Contact</resourceContactInfo>
+	<metadataContactInfo>Metadata Contact</metadataContactInfo>
+
+	<!-- new tabs in default mode -->
+  <resourceCitation>Citation</resourceCitation>
+  <resourceDescription>Description</resourceDescription>
+  <resourceKeywords>Keywords</resourceKeywords>
+  <resourceMaintenance>Maintenance</resourceMaintenance>
+  <constraints>Constraints</constraints>
+  <resourceConstraints>Resource Constraints</resourceConstraints>
+  <metadataConstraints>Metadata Constraints</metadataConstraints>
+  <contacts>Contacts</contacts>
+  <resourceContact>Resource Contacts</resourceContact>
+  <metadataContact>Metadata Contacts</metadataContact>
+  <resourceSpatial>Spatial</resourceSpatial>
+  <resourceExtents>Extents</resourceExtents>
+  <resourceType>Type</resourceType>
+  <resourceLineageTab>Lineage</resourceLineageTab>
+  <distribution>Distribution</distribution>
+  <dataParameters>Parameters</dataParameters>
+  <distributionFormat>Format</distributionFormat>
+  <distributionFormatNoTitle></distributionFormatNoTitle>
+
+  <useAssociatedResources><span>Add an online resource for distribution using the "<i class="fa fa-link"></i><i class="icon-external-link"></i>Associated resources" panel at the right hand side of the form</span></useAssociatedResources>
 </strings>
