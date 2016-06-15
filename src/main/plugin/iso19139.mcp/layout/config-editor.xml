@@ -55,9 +55,12 @@
 
     <for name="gmd:referenceSystemInfo" addDirective="data-gn-crs-selector"/>
 
-    <for name="mcp:party" addDirective="data-gn-organisation-entry-selector">
-      <directiveAttributes data-schema="iso19139.mcp"/>
-		</for>
+    <for name="mcp:party" addDirective="data-gn-directory-entry-selector">
+      <directiveAttributes
+            data-schema="iso19139.mcp"
+            data-template-add-action="true"
+            data-template-type="party"/>
+    </for>
     
     <for name="gmd:contact" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
