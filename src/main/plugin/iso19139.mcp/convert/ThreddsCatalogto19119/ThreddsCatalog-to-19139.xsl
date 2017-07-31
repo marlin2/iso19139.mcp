@@ -63,8 +63,10 @@
                                  codeListValue="utf8"/>
       </gmd:characterSet>
 
+      <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
       <gmd:hierarchyLevel>
-        <gmd:MD_ScopeCode codeList="./resources/codeList.xml#MD_ScopeCode" codeListValue="service"/>
+        <gmd:MD_ScopeCode codeList="./resources/codeList.xml#MD_ScopeCode" codeListValue="dataset"/>
       </gmd:hierarchyLevel>
 
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -114,11 +116,11 @@
         <gmd:MD_Distribution>
           <gmd:distributionFormat>
             <gmd:MD_Format>
-              <gmd:name gco:nilReason="missing">
-                <gco:CharacterString/>
+              <gmd:name>
+                <gco:CharacterString>netcdf/cf</gco:CharacterString>
               </gmd:name>
-              <gmd:version gco:nilReason="missing">
-                <gco:CharacterString/>
+              <gmd:version>
+                <gco:CharacterString>4.0</gco:CharacterString>
               </gmd:version>
             </gmd:MD_Format>
           </gmd:distributionFormat>
