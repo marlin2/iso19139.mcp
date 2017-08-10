@@ -14,9 +14,9 @@
 			xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 			exclude-result-prefixes="gmd gmx gco gml srv geonet mcp app xlink ibis xsl">
 
-	<xsl:import href="../iso19139/index-fields/default.xsl"/>
+	<xsl:import href="../../iso19139/index-fields/default.xsl"/>
 
-	<xsl:include href="../iso19139/convert/function.xsl" />
+	<xsl:include href="../../iso19139/convert/functions.xsl" />
 
 
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -     
@@ -97,7 +97,7 @@
 	     then make sure that this record has download indexed so that 
 			 quick search on data attached can be used
 	     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-	<xsl:template mode="index" match="gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[gmd:linkage/gmd:URL!='' and contains(gmd:protocol/*,'http--csiro-oa-app')]">
+	<xsl:template mode="index" match="gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource[gmd:linkage/gmd:URL!='' and (contains(gmd:protocol/*,'http--csiro-oa-app') or contains(gmd:protocol/*,'download'))]">
 		<Field name="download" string="on" store="false" index="true"/>
 	</xsl:template>
 	
