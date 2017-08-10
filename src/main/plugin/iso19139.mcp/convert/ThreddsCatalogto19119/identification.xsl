@@ -416,7 +416,11 @@
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+		<xsl:choose>
+			<xsl:when test="normalize-space($bbox)!=''">
+
     <xsl:variable name="bboxtokens" select="tokenize($bbox,'\^\^\^')"/>
+
     <gmd:extent>
       <gmd:EX_Extent>
         <gmd:geographicElement>
@@ -437,8 +441,40 @@
         </gmd:geographicElement>
       </gmd:EX_Extent>
     </gmd:extent>
+	
+			</xsl:when>
+			<xsl:otherwise>  <!-- Use the stuff provided by the wms -->
+
+		<xsl:variable name="wmsBBOX" select="//wms:Layer/wms:BoundingBox"/>
+
+    <gmd:extent>
+      <gmd:EX_Extent>
+        <gmd:geographicElement>
+          <gmd:EX_GeographicBoundingBox>
+            <gmd:westBoundLongitude>
+              <gco:Decimal><xsl:value-of select="$wmsBBOX[1]/@minx"/></gco:Decimal>
+            </gmd:westBoundLongitude>
+            <gmd:eastBoundLongitude>
+              <gco:Decimal><xsl:value-of select="$wmsBBOX[1]/@maxx"/></gco:Decimal>
+            </gmd:eastBoundLongitude>
+            <gmd:southBoundLatitude>
+              <gco:Decimal><xsl:value-of select="$wmsBBOX[1]/@miny"/></gco:Decimal>
+            </gmd:southBoundLatitude>
+            <gmd:northBoundLatitude>
+              <gco:Decimal><xsl:value-of select="$wmsBBOX[1]/@maxy"/></gco:Decimal>
+            </gmd:northBoundLatitude>
+          </gmd:EX_GeographicBoundingBox>
+        </gmd:geographicElement>
+      </gmd:EX_Extent>
+    </gmd:extent>
+
+			</xsl:otherwise>
+		</xsl:choose>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<xsl:choose>
+			<xsl:when test="normalize-space($textent)!=''">
 
     <xsl:variable name="textenttokens" select="tokenize($textent,'\^\^\^')"/>
 		<gmd:extent>
@@ -455,6 +491,30 @@
 				</gmd:temporalElement>
 			</gmd:EX_Extent>
 		</gmd:extent>
+
+			</xsl:when>
+			<xsl:otherwise>
+
+		<xsl:variable name="wmsTextent" select="//wms:Layer[@queryable='1']/wms:Dimension"/>
+		<xsl:variable name="wTokens" select="tokenize($wmsTextent[1]/text(),',')"/>
+
+		<gmd:extent>
+			<gmd:EX_Extent>
+				<gmd:temporalElement>
+					<gmd:EX_TemporalExtent>
+						<gmd:extent>
+							<gml:TimePeriod gml:id="TP1">
+								<gml:beginPosition><xsl:value-of select="$wTokens[1]"/></gml:beginPosition>
+								<gml:endPosition><xsl:value-of select="$wTokens[last()]"/></gml:endPosition>
+							</gml:TimePeriod>
+						</gmd:extent>
+					</gmd:EX_TemporalExtent>
+				</gmd:temporalElement>
+			</gmd:EX_Extent>
+		</gmd:extent>
+
+			</xsl:otherwise>
+		</xsl:choose>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -483,5 +543,7 @@
   </xsl:template>
 
   <!-- =================================================================== -->
+
+	<!-- mcp:DP_DataParameters added by harvester -->
 
 </xsl:stylesheet>
