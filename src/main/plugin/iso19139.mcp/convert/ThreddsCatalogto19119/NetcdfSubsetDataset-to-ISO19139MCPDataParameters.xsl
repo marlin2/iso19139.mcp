@@ -26,7 +26,7 @@
 		<mcp:dataParameters>
 			<mcp:DP_DataParameters>
 
-			<xsl:for-each select="gridSet/grid[attribute/@value='spatial']">
+			<xsl:for-each select="gridSet/grid">
 				<mcp:dataParameter>
 					<mcp:DP_DataParameter>
 
