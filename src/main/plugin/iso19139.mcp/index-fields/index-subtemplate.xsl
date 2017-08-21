@@ -49,6 +49,8 @@
           <Field name="email" string="{.}" store="true" index="true"/>
         </xsl:for-each>
 
+				<xsl:call-template name="subtemplate-common-fields"/>
+
     </xsl:template>
 
 </xsl:stylesheet>
