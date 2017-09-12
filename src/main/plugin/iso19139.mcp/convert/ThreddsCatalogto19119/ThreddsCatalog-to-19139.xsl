@@ -59,14 +59,14 @@
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
       <gmd:characterSet>
-        <gmd:MD_CharacterSetCode codeList="./resources/codeList.xml#MD_CharacterSetCode"
+        <gmd:MD_CharacterSetCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"
                                  codeListValue="utf8"/>
       </gmd:characterSet>
 
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
       <gmd:hierarchyLevel>
-        <gmd:MD_ScopeCode codeList="./resources/codeList.xml#MD_ScopeCode" codeListValue="dataset"/>
+        <gmd:MD_ScopeCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"/>
       </gmd:hierarchyLevel>
 
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -134,8 +134,11 @@
                     </gmd:URL>
                   </gmd:linkage>
                   <gmd:protocol>
-                  	<gco:CharacterString>WWW:LINK-1.0-http--threddscatalog</gco:CharacterString>
+                  	<gco:CharacterString>UNIDATA:THREDDS</gco:CharacterString>
                 	</gmd:protocol>
+                  <gmd:function>
+                  	<gmd:CI_OnLineFunctionCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="service"/>
+                	</gmd:function>
                 </gmd:CI_OnlineResource>
               </gmd:onLine>
               <gmd:onLine>
@@ -149,8 +152,11 @@
                   	<gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
                 	</gmd:protocol>
                   <gmd:description>
-          					<gco:CharacterString>Human Readable Link To Thredds Dataset</gco:CharacterString>
+          					<gco:CharacterString>Human Readable Link To Thredds Catalog</gco:CharacterString>
         					</gmd:description>
+                  <gmd:function>
+                  	<gmd:CI_OnLineFunctionCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="information"/>
+                	</gmd:function>
                 </gmd:CI_OnlineResource>
               </gmd:onLine>
             </gmd:MD_DigitalTransferOptions>
