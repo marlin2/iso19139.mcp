@@ -266,6 +266,27 @@
 					<Field name="keywordId" string="{replace($keywordId,'%23','#')}" store="true" index="true"/>
 				</xsl:if>
 			</xsl:if>
+
+      <xsl:choose>
+            <xsl:when test="contains($thesaurusId,'sourceregister')">
+              <Field name="source" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusId,'surveyregister')">
+              <Field name="survey" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusId,'projectregister')">
+              <Field name="project" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusId,'gcmd_keywords')">
+              <Field name="gcmd" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:when test="contains($thesaurusId,'awavea-keywords')">
+              <Field name="awavea" string="{string(.)}" store="true" index="true"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <Field name="otherkeyword" string="{string(.)}" store="true" index="true"/>
+            </xsl:otherwise>
+      </xsl:choose>
 		</xsl:for-each>
 
 		<xsl:apply-templates mode="index" select="*"/>
