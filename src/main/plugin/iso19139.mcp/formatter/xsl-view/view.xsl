@@ -221,17 +221,93 @@
     <xsl:apply-templates mode="render-field" select="*"/>
   </xsl:template>
 
-  <xsl:template mode="render-field" match="mcp:MD_DataIdentification">
+	<!-- override the ordering defined by the fields in the advanced tab of 
+       config-editor.xml so we can sort the descriptive keywords in the order
+       we defined above... -->
+  <xsl:template mode="render-field" match="mcp:MD_DataIdentification[gmd:descriptiveKeywords]" priority="100">
+    <xsl:apply-templates mode="render-field" select="gmd:citation"/>
+    <xsl:apply-templates mode="render-field" select="gmd:abstract"/>
+    <xsl:apply-templates mode="render-field" select="gmd:purpose"/>
+    <xsl:apply-templates mode="render-field" select="gmd:credit"/>
+    <xsl:apply-templates mode="render-field" select="gmd:status"/>
+    <xsl:apply-templates mode="render-field" select="mcp:resourceContactInfo"/>
+    <xsl:apply-templates mode="render-field" select="gmd:resourceMaintenance"/>
+    <xsl:apply-templates mode="render-field" select="gmd:graphicOverview"/>
+    <xsl:apply-templates mode="render-field" select="gmd:resourceFormat"/>
+
+    <xsl:apply-templates mode="render-field" select="gmd:topicCategory"/>
 		<xsl:variable name="theKeys" select="."/>
 		<!-- process keywords in order specified in variable $thesauri above -->
 		<xsl:for-each select="$thesauri/thesauri/thesaurus">
 			<xsl:variable name="currentThesaurus" select="id"/>
-		  <!-- <xsl:message>PROCESSING <xsl:value-of select="$currentThesaurus"/> WITH <xsl:value-of select="$theKeys/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor"/></xsl:message>		-->
-			<xsl:apply-templates mode="render-field" select="$theKeys/gmd:descriptiveKeywords[gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor=$currentThesaurus]"/>	
+			<xsl:apply-templates mode="descriptive-keyword" select="$theKeys/gmd:descriptiveKeywords[gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor=$currentThesaurus]"/>	
 		</xsl:for-each>
 
-		<xsl:apply-templates mode="render-field" select="*[name()!='gmd:descriptiveKeywords']"/>
+    <xsl:apply-templates mode="render-field" select="gmd:resourceSpecificUsage"/>
+    <xsl:apply-templates mode="render-field" select="gmd:resourceConstraints"/>
+    <xsl:apply-templates mode="render-field" select="gmd:aggregationInfo"/>
+    <xsl:apply-templates mode="render-field" select="gmd:spatialRepresentationType"/>
+    <xsl:apply-templates mode="render-field" select="gmd:spatialResolution"/>
+    <xsl:apply-templates mode="render-field" select="gmd:environmentDescription"/>
+    <xsl:apply-templates mode="render-field" select="gmd:extent"/>
+    <xsl:apply-templates mode="render-field" select="gmd:supplementalInformation"/>
+    <xsl:apply-templates mode="render-field" select="mcp:samplingFrequency"/>
+    <xsl:apply-templates mode="render-field" select="mcp:dataParameters"/>
+  </xsl:template>
 
+  <!-- Display thesaurus name and the list of keywords -->
+  <xsl:template mode="descriptive-keyword"
+                match="gmd:descriptiveKeywords[*/gmd:thesaurusName/gmd:CI_Citation/gmd:title]"
+                priority="100">
+    <dl class="gn-keyword">
+      <dt>
+        <xsl:apply-templates mode="render-value"
+                             select="*/gmd:thesaurusName/gmd:CI_Citation/gmd:title/*"/>
+
+        <xsl:if test="*/gmd:type/*[@codeListValue != '']">
+          (<xsl:apply-templates mode="render-value"
+                                select="*/gmd:type/*/@codeListValue"/>)
+        </xsl:if>
+      </dt>
+      <dd>
+        <div>
+          <ul>
+            <li>
+              <xsl:for-each select="*/gmd:keyword">
+                <xsl:apply-templates mode="render-value"
+                                     select="."/><xsl:if test="position() != last()">, </xsl:if>
+              </xsl:for-each>
+            </li>
+          </ul>
+        </div>
+      </dd>
+    </dl>
+  </xsl:template>
+
+  <xsl:template mode="descriptive-keyword"
+                match="gmd:descriptiveKeywords[not(*/gmd:thesaurusName/gmd:CI_Citation/gmd:title)]"
+                priority="100">
+    <dl class="gn-keyword">
+      <dt>
+        <xsl:value-of select="$schemaStrings/noThesaurusName"/>
+        <xsl:if test="*/gmd:type/*[@codeListValue != '']">
+          (<xsl:apply-templates mode="render-value"
+                                select="*/gmd:type/*/@codeListValue"/>)
+        </xsl:if>
+      </dt>
+      <dd>
+        <div>
+          <ul>
+            <li>
+              <xsl:for-each select="*/gmd:keyword">
+                <xsl:apply-templates mode="render-value"
+                                     select="."/><xsl:if test="position() != last()">, </xsl:if>
+              </xsl:for-each>
+            </li>
+          </ul>
+        </div>
+      </dd>
+    </dl>
   </xsl:template>
 
   <!-- Some major sections are boxed -->
@@ -241,7 +317,6 @@
       gmd:report/*|
       gmd:result/*|
       gmd:extent[name(..)!='gmd:EX_TemporalExtent']|
-      gmd:descriptiveKeywords/*|
       *[$isFlatMode = false() and gmd:* and not(gco:CharacterString) and not(gmd:URL)]">
 
     <div class="entry name">
@@ -256,6 +331,61 @@
     </div>
   </xsl:template>
 
+  <xsl:template mode="render-field" match="mcp:resourceContactInfo"
+                priority="100">
+    <div class="gn-contact">
+      <h3>
+        <i class="fa fa-envelope">&#160;</i>
+        <xsl:apply-templates mode="render-value"
+                             select="*/mcp:role/*/@codeListValue"/>
+      </h3>
+      <div class="row">
+        <div class="col-md-6">
+          <address itemprop="author"
+                   itemscope="itemscope"
+                   itemtype="http://schema.org/Organization">
+            <strong>
+                <xsl:apply-templates mode="mcp-html" select="*/mcp:party/*/mcp:individual"/>
+            </strong>
+            <br/>
+            <xsl:variable name="organisationName" select="*/mcp:party/*/mcp:name/*"/>
+            <!-- NOTE: Show only the first address in the contact info SP Nov. 2015 -->
+            <xsl:apply-templates mode="mcp-html" select="*/mcp:party/*/mcp:contactInfo[1]">
+              <xsl:with-param name="organisationName" select="$organisationName"/>
+            </xsl:apply-templates>
+          </address>
+        </div>
+      </div>
+    </div>
+  </xsl:template>
+
+  <xsl:template mode="mcp-html" match="mcp:individual">
+    <ul>
+      <li style="list-style-type: none;">
+        <xsl:value-of select="descendant::mcp:name/*"/>
+        <xsl:if test="normalize-space(descendant::mcp:positionName/*)">
+          <xsl:value-of select="concat(', ',descendant::mcp:positionName/*)"/>
+        </xsl:if>
+      </li>
+    </ul>
+  </xsl:template>
+
+  <xsl:template mode="mcp-html" match="mcp:contactInfo">
+    <xsl:param name="organisationName"/>
+    <ul>
+      <li style="list-style-type: none;"><xsl:value-of select="$organisationName"/></li>
+      <li style="list-style-type: none;"><xsl:value-of select="descendant::gmd:deliveryPoint/*"/></li>
+      <li style="list-style-type: none;"><xsl:value-of select="descendant::gmd:city/*"/></li>
+      <li style="list-style-type: none;"><xsl:value-of select="descendant::gmd:administrativeArea/*"/></li>
+      <li style="list-style-type: none;"><xsl:value-of select="concat(descendant::gmd:country/*,' ',descendant::gmd:postalCode/*)"/></li>
+      <xsl:if test="normalize-space(descendant::gmd:electronicMailAddress/*)">
+        <li style="list-style-type: none;"><xsl:value-of select="concat('Email: ',descendant::gmd:electronicMailAddress/*)"/></li>
+      </xsl:if>
+      <xsl:if test="normalize-space(descendant::gmd:voice/*)">
+        <li style="list-style-type: none;"><xsl:value-of select="concat('Phone: ',descendant::gmd:voice/*)"/></li>
+      </xsl:if>
+    </ul>
+  </xsl:template>
 
   <!-- Bbox is displayed with an overview and the geom displayed on it
   and the coordinates displayed around -->
@@ -504,61 +634,6 @@
           <xsl:apply-templates mode="render-field"
                                select="*/gmd:authority"/>
         </p>
-      </dd>
-    </dl>
-  </xsl:template>
-
-  <!-- Display thesaurus name and the list of keywords -->
-  <xsl:template mode="render-field"
-                match="gmd:descriptiveKeywords[*/gmd:thesaurusName/gmd:CI_Citation/gmd:title]"
-                priority="100">
-    <dl class="gn-keyword">
-      <dt>
-        <xsl:apply-templates mode="render-value"
-                             select="*/gmd:thesaurusName/gmd:CI_Citation/gmd:title/*"/>
-
-        <xsl:if test="*/gmd:type/*[@codeListValue != '']">
-          (<xsl:apply-templates mode="render-value"
-                                select="*/gmd:type/*/@codeListValue"/>)
-        </xsl:if>
-      </dt>
-      <dd>
-        <div>
-          <ul>
-            <li>
-              <xsl:for-each select="*/gmd:keyword">
-                <xsl:apply-templates mode="render-value"
-                                     select="."/><xsl:if test="position() != last()">, </xsl:if>
-              </xsl:for-each>
-            </li>
-          </ul>
-        </div>
-      </dd>
-    </dl>
-  </xsl:template>
-
-  <xsl:template mode="render-field"
-                match="gmd:descriptiveKeywords[not(*/gmd:thesaurusName/gmd:CI_Citation/gmd:title)]"
-                priority="100">
-    <dl class="gn-keyword">
-      <dt>
-        <xsl:value-of select="$schemaStrings/noThesaurusName"/>
-        <xsl:if test="*/gmd:type/*[@codeListValue != '']">
-          (<xsl:apply-templates mode="render-value"
-                                select="*/gmd:type/*/@codeListValue"/>)
-        </xsl:if>
-      </dt>
-      <dd>
-        <div>
-          <ul>
-            <li>
-              <xsl:for-each select="*/gmd:keyword">
-                <xsl:apply-templates mode="render-value"
-                                     select="."/><xsl:if test="position() != last()">, </xsl:if>
-              </xsl:for-each>
-            </li>
-          </ul>
-        </div>
       </dd>
     </dl>
   </xsl:template>
@@ -847,6 +922,7 @@
                 priority="100">
     <i class="fa fa-lock text-warning" title="{{{{'withheld' | translate}}}}">&#160;</i>
   </xsl:template>
+
   <xsl:template mode="render-value"
                 match="@*"/>
 
