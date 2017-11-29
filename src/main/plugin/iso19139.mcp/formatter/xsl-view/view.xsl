@@ -49,6 +49,77 @@
 
   -->
 
+  <!-- Thesauri in marlin2 records have to be displayed in a manner that (supposedly) makes sense
+       to the user ie. most important thesaurus first - this variable does that using thesaurus id
+       the name is just a helper to identify the id 
+       -->
+
+  <xsl:variable name="thesauri">
+          <thesauri>
+            <thesaurus>
+              <name>GCMD Keywords</name>
+              <id>geonetwork.thesaurus.external.theme.gcmd_keywords</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Areas of Interest</name>
+              <id>geonetwork.thesaurus.register.discipline.urn:marlin.csiro.au:keywords:cmarAOI</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Global Project List</name>
+              <id>geonetwork.thesaurus.register.project.urn:marlin.csiro.au:globalprojectregister</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Project List</name>
+              <id>geonetwork.thesaurus.register.project.urn:marlin.csiro.au:projectregister</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Source List</name>
+              <id>geonetwork.thesaurus.register.dataSource.urn:marlin.csiro.au:sourceregister</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Survey List</name>
+              <id>geonetwork.thesaurus.register.survey.urn:marlin.csiro.au:surveyregister</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Standard Data Types</name>
+              <id>geonetwork.thesaurus.register.discipline.urn:marlin.csiro.au:keywords:standardDataType</id>
+            </thesaurus>
+            <thesaurus>
+              <name>MCP Collection Methods</name>
+              <id>geonetwork.thesaurus.external.theme.mcp_collection_methods</id>
+            </thesaurus>
+            <!-- This is the old equipment list - to be deleted soon -->
+            <thesaurus>
+              <name>CSIRO Equipment List</name>
+              <id>geonetwork.thesaurus.register.equipment.urn:marlin.csiro.au:keywords:equipment</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Equipment List</name>
+              <id>geonetwork.thesaurus.register.equipment.urn:marlin.csiro.au:Equipment</id>
+            </thesaurus>
+            <thesaurus>
+              <name>MCP Geographic Extent Names</name>
+              <id>geonetwork.thesaurus.external.place.mcp_regions</id>
+            </thesaurus>
+            <thesaurus>
+              <name>CSIRO Defined Regions</name>
+              <id>geonetwork.thesaurus.register.place.urn:marlin.csiro.au:definedregions</id>
+            </thesaurus>
+            <thesaurus>
+              <name>AODN Geographic Extent Names</name>
+              <id>geonetwork.thesaurus.register.place.urn:aodn.org.au:geographicextents</id>
+            </thesaurus>
+            <thesaurus>
+              <name>Australian National Species List</name>
+              <id>geonetwork.thesaurus.external.taxon.nsl_species_all</id>
+            </thesaurus>
+            <thesaurus>
+              <name>World Register of Marine Species</name>
+              <id>geonetwork.thesaurus.register.taxon.urn:lsid:marinespecies.org:taxname</id>
+            </thesaurus>
+          </thesauri>
+  </xsl:variable>
+
 
   <!-- Load the editor configuration to be able
   to render the different views -->
@@ -150,6 +221,18 @@
     <xsl:apply-templates mode="render-field" select="*"/>
   </xsl:template>
 
+  <xsl:template mode="render-field" match="mcp:MD_DataIdentification">
+		<xsl:variable name="theKeys" select="."/>
+		<!-- process keywords in order specified in variable $thesauri above -->
+		<xsl:for-each select="$thesauri/thesauri/thesaurus">
+			<xsl:variable name="currentThesaurus" select="id"/>
+		  <!-- <xsl:message>PROCESSING <xsl:value-of select="$currentThesaurus"/> WITH <xsl:value-of select="$theKeys/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor"/></xsl:message>		-->
+			<xsl:apply-templates mode="render-field" select="$theKeys/gmd:descriptiveKeywords[gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gmx:Anchor=$currentThesaurus]"/>	
+		</xsl:for-each>
+
+		<xsl:apply-templates mode="render-field" select="*[name()!='gmd:descriptiveKeywords']"/>
+
+  </xsl:template>
 
   <!-- Some major sections are boxed -->
   <xsl:template mode="render-field"
@@ -158,6 +241,7 @@
       gmd:report/*|
       gmd:result/*|
       gmd:extent[name(..)!='gmd:EX_TemporalExtent']|
+      gmd:descriptiveKeywords/*|
       *[$isFlatMode = false() and gmd:* and not(gco:CharacterString) and not(gmd:URL)]">
 
     <div class="entry name">
@@ -424,7 +508,6 @@
     </dl>
   </xsl:template>
 
-
   <!-- Display thesaurus name and the list of keywords -->
   <xsl:template mode="render-field"
                 match="gmd:descriptiveKeywords[*/gmd:thesaurusName/gmd:CI_Citation/gmd:title]"
@@ -453,7 +536,6 @@
       </dd>
     </dl>
   </xsl:template>
-
 
   <xsl:template mode="render-field"
                 match="gmd:descriptiveKeywords[not(*/gmd:thesaurusName/gmd:CI_Citation/gmd:title)]"
