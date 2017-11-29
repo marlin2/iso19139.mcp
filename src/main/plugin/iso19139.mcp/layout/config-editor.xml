@@ -678,7 +678,7 @@
         <section xpath="/mcp:MD_Metadata/gmd:contentInfo" or="contentInfo" in="/mcp:MD_Metadata"/>
         <section xpath="/mcp:MD_Metadata/gmd:portrayalCatalogueInfo" or="portrayalCatalogueInfo"
                  in="/mcp:MD_Metadata"/>
-        <section xpath="/mcp:MD_Metadata">
+        <section name="mcp:MD_Metadata">
           <field xpath="/mcp:MD_Metadata/gmd:fileIdentifier"/>
           <field xpath="/mcp:MD_Metadata/gmd:language" or="language" in="/mcp:MD_Metadata"/>
           <field xpath="/mcp:MD_Metadata/gmd:characterSet"/>

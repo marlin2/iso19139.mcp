@@ -231,6 +231,7 @@
     <xsl:apply-templates mode="render-field" select="gmd:credit"/>
     <xsl:apply-templates mode="render-field" select="gmd:status"/>
     <xsl:apply-templates mode="render-field" select="mcp:resourceContactInfo"/>
+    <xsl:apply-templates mode="render-field" select="gmd:contact"/>
     <xsl:apply-templates mode="render-field" select="gmd:resourceMaintenance"/>
     <xsl:apply-templates mode="render-field" select="gmd:graphicOverview"/>
     <xsl:apply-templates mode="render-field" select="gmd:resourceFormat"/>
@@ -331,7 +332,8 @@
     </div>
   </xsl:template>
 
-  <xsl:template mode="render-field" match="mcp:resourceContactInfo"
+  <xsl:template mode="render-field" 
+                match="mcp:resourceContactInfo|mcp:metadataContactInfo"
                 priority="100">
     <div class="gn-contact">
       <h3>
