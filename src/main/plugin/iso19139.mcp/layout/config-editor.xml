@@ -410,7 +410,6 @@
                 </key>
                 <key label="conformity_date" xpath="gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date" use="date"/>
                 <key label="explanation" xpath="gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_ConformanceResult/gmd:explanation/gco:CharacterString" use="textarea"/>
-                <key label="pass" use="checkbox" xpath="gmd:DQ_CompletenessOmission/gmd:result/gmd:DQ_ConformanceResult/gmd:pass/gco:Boolean"/>
               </values>
               <snippet>
 								<gmd:report>
@@ -451,9 +450,7 @@
                     <gmd:explanation>
                       <gco:CharacterString>{{explanation}}</gco:CharacterString>
                     </gmd:explanation>
-                    <gmd:pass>
-                      <gco:Boolean>{{pass}}</gco:Boolean>
-                    </gmd:pass>
+                    <gmd:pass gco:nilReason="inapplicable"/>
                   </gmd:DQ_ConformanceResult>
                 </gmd:result>
 
@@ -472,7 +469,6 @@
                 </key>
                 <key label="conformity_date" xpath="gmd:DQ_NonQuantitativeAttributeAccuracy/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date" use="date"/>
                 <key label="explanation" xpath="gmd:DQ_NonQuantitativeAttributeAccuracy/gmd:result/gmd:DQ_ConformanceResult/gmd:explanation/gco:CharacterString" use="textarea"/>
-                <key label="pass" use="checkbox" xpath="gmd:DQ_NonQuantitativeAttributeAccuracy/gmd:result/gmd:DQ_ConformanceResult/gmd:pass/gco:Boolean"/>
               </values>
               <snippet>
 								<gmd:report>
@@ -513,9 +509,7 @@
                     <gmd:explanation>
                       <gco:CharacterString>{{explanation}}</gco:CharacterString>
                     </gmd:explanation>
-                    <gmd:pass>
-                      <gco:Boolean>{{pass}}</gco:Boolean>
-                    </gmd:pass>
+                    <gmd:pass gco:nilReason="inapplicable"/>
                   </gmd:DQ_ConformanceResult>
                 </gmd:result>
 
@@ -534,7 +528,6 @@
                 </key>
                 <key label="conformity_date" xpath="gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date" use="date"/>
                 <key label="explanation" xpath="gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:explanation/gco:CharacterString" use="textarea"/>
-                <key label="pass" use="checkbox" xpath="gmd:DQ_ConceptualConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:pass/gco:Boolean"/>
               </values>
               <snippet>
 								<gmd:report>
@@ -575,9 +568,7 @@
                     <gmd:explanation>
                       <gco:CharacterString>{{explanation}}</gco:CharacterString>
                     </gmd:explanation>
-                    <gmd:pass>
-                      <gco:Boolean>{{pass}}</gco:Boolean>
-                    </gmd:pass>
+                    <gmd:pass gco:nilReason="inapplicable"/>
                   </gmd:DQ_ConformanceResult>
                 </gmd:result>
 
@@ -596,7 +587,6 @@
                 </key>
                 <key label="conformity_date" xpath="gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date" use="date"/>
                 <key label="explanation" xpath="gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_ConformanceResult/gmd:explanation/gco:CharacterString" use="textarea"/>
-                <key label="pass" use="checkbox" xpath="gmd:DQ_AbsoluteExternalPositionalAccuracy/gmd:result/gmd:DQ_ConformanceResult/gmd:pass/gco:Boolean"/>
               </values>
               <snippet>
 								<gmd:report>
@@ -637,9 +627,7 @@
                     <gmd:explanation>
                       <gco:CharacterString>{{explanation}}</gco:CharacterString>
                     </gmd:explanation>
-                    <gmd:pass>
-                      <gco:Boolean>{{pass}}</gco:Boolean>
-                    </gmd:pass>
+                    <gmd:pass gco:nilReason="inapplicable"/>
                   </gmd:DQ_ConformanceResult>
                 </gmd:result>
 
