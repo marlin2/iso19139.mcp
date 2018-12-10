@@ -533,6 +533,15 @@
 		</xsl:element>
 	</xsl:template>
 
+	<!-- ========================================================================== -->
+	<!-- match gmd:pass in gmd:dataQualityInfo and set gco:nilReason="inapplicable" -->
+	<!-- ========================================================================== -->
+	<xsl:template match="gmd:pass[name(..)='gmd:DQ_ConformanceResult']">
+    <xsl:copy>
+			<xsl:attribute name="gco:nilReason">inapplicable</xsl:attribute>
+    </xsl:copy>
+  </xsl:template>
+
 	<!-- ================================================================= -->
 	<!-- Adjust the namespace declaration - In some cases name() is used to get the 
 		element. The assumption is that the name is in the format of  <ns:element> 
