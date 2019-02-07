@@ -134,7 +134,7 @@
                     </gmd:URL>
                   </gmd:linkage>
                   <gmd:protocol>
-                  	<gco:CharacterString>UNIDATA:THREDDS</gco:CharacterString>
+                  	<gco:CharacterString>WWW:LINK-1.0-http--threddscatalog</gco:CharacterString>
                 	</gmd:protocol>
                   <gmd:function>
                   	<gmd:CI_OnLineFunctionCode codeList="http://bluenet3.antcrc.utas.edu.au/mcp-1.5-experimental/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="service"/>
