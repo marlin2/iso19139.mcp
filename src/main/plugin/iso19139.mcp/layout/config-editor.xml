@@ -53,7 +53,11 @@
 
     <for name="gmd:country" use="data-gn-country-picker"/>
 
-    <for name="gmd:referenceSystemInfo" addDirective="data-gn-crs-selector"/>
+    <for name="gmd:referenceSystemInfo" addDirective="data-gn-crs-selector">
+      <directiveAttributes
+            data-template-add-action="false"
+      />
+    </for>
 
     <for name="mcp:party" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
@@ -130,7 +134,9 @@
 
       Exclude all thesaurus already used in the metadata:
       -->
-      <directiveAttributes data-include="xpath::string-join(mcp:MD_Metadata/gmd:identificationInfo//gmd:thesaurusName/*/gmd:identifier/*/gmd:code/gmx:Anchor/concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"/>
+      <directiveAttributes 
+            data-include="xpath::string-join(mcp:MD_Metadata/gmd:identificationInfo//gmd:thesaurusName/*/gmd:identifier/*/gmd:code/gmx:Anchor/concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"
+            data-template-add-action="false"/>
     </for>
     <for name="mcp:MD_Commons" addDirective="data-gn-commons-jurisdiction-selector"/>
   </fields>
