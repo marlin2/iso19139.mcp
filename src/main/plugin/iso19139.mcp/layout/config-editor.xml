@@ -269,8 +269,10 @@
                    data-config="{{gnCurrentEdit.geoPublisherConfig}}"
                    data-lang="lang"/>
         <!-- <directive data-gn-validation-report=""/> -->
-        <directive data-gn-suggestion-list=""/>
-        <directive data-gn-need-help="user-guide/describing-information/creating-metadata.html"/>
+        <!-- <directive data-gn-suggestion-list=""/> -->
+        <!-- relative docUrl in gnGlobalSettings which is set to
+             https://confluence.csiro.au/display/DataCentreShared/ -->
+        <directive data-gn-need-help="MARLIN+Help-+Editing"/>
       </sidePanel>
 			<tab id="resourceCitation" default="true" mode="flat">
 				<section name=" ">
