@@ -327,85 +327,99 @@ This is a link to an html description of a species name (or higher level ranks) 
 	<element name="gmd:protocol" id="398.0">
 		<label>Protocol</label>
 		<description>Connection protocol to be used</description>
-		<helper sort="true">
-			<option show="y" value="ESRI:AIMS--http--configuration">ArcIMS Map Service Configuration File
-				(*.AXL)
-			</option>
-			<option show="y" value="ESRI:AIMS--http-get-feature">ArcIMS Internet Feature Map Service
-			</option>
-			<option show="-" value="ESRI:AIMS--http-get-image">ArcIMS Internet Image Map Service
-			</option>
-			<option show="y" value="GLG:KML-2.0-http-get-map">Google Earth KML service (ver 2.0)
-			</option>
-			<option show="-" value="OGC:CSW">OGC-CSW Catalogue Service for the Web
-			</option>
-			<option show="-" value="OGC:KML">OGC-KML Keyhole Markup Language
-			</option>
-			<option show="-" value="OGC:GML">OGC-GML Geography Markup Language
-			</option>
-			<option show="-" value="OGC:ODS">OGC-ODS OpenLS Directory Service
-			</option>
-			<option show="-" value="OGC:OGS">OGC-ODS OpenLS Gateway Service</option>
-			<option show="-" value="OGC:OUS">OGC-ODS OpenLS Utility Service</option>
-			<option show="-" value="OGC:OPS">OGC-ODS OpenLS Presentation Service
-			</option>
-			<option show="-" value="OGC:ORS">OGC-ODS OpenLS Route Service</option>
-			<option show="-" value="OGC:SOS">OGC-SOS Sensor Observation Service
-			</option>
-			<option show="-" value="OGC:SPS">OGC-SPS Sensor Planning Service
-			</option>
-			<option show="-" value="OGC:SAS">OGC-SAS Sensor Alert Service</option>
-			<option show="-" value="OGC:WCS">OGC-WCS Web Coverage Service</option>
-			<option show="y" value="OGC:WCS-1.1.0-http-get-capabilities">OGC-WCS Web Coverage Service (ver
-				1.1.0)
-			</option>
-			<option show="-" value="OGC:WCTS">OGC-WCTS Web Coordinate Transformation
-				Service
-			</option>
-			<option show="-" value="OGC:WFS">OGC-WFS Web Feature Service</option>
-			<option show="y" value="OGC:WFS-1.0.0-http-get-capabilities">OGC-WFS Web Feature Service (ver 1.0.0)
-			</option>
-			<option show="-" value="OGC:WFS-G">OGC-WFS-G Gazzetteer Service</option>
-			<option show="y" value="OGC:WMC-1.1.0-http-get-capabilities">OGC-WMC Web Map Context (ver 1.1)
-			</option>
-			<option show="-" value="OGC:WMS">OGC-WMS Web Map Service</option>
-			<option show="-" value="OGC:WMS-1.1.1-http-get-capabilities">OGC-WMS Capabilities service (ver
-				1.1.1)
-			</option>
-			<option show="-" value="OGC:WMS-1.3.0-http-get-capabilities">OGC-WMS Capabilities service (ver
-				1.3.0)
-			</option>
-			<option show="-" value="OGC:WMS-1.1.1-http-get-map">OGC Web Map Service (ver 1.1.1)
-			</option>
-			<option show="-" value="OGC:WMS-1.3.0-http-get-map">OGC Web Map Service (ver 1.3.0)
-			</option>
-			<option show="-" value="OGC:SOS-1.0.0-http-get-observation">OGC-SOS Get Observation (ver 1.0.0)
-			</option>
-			<option show="-" value="OGC:SOS-1.0.0-http-post-observation">OGC-SOS Get Observation (POST) (ver
-				1.0.0)
-			</option>
-			<option show="-" value="OGC:WNS">OGC-WNS Web Notification Service
-			</option>
-			<option show="-" value="OGC:WPS">OGC-WPS Web Processing Service</option>
-			<option show="-" value="WWW:DOWNLOAD-1.0-ftp--download">File for download through FTP</option>
-			<option show="-" value="WWW:DOWNLOAD-1.0-http--download">File for download</option>
-			<option show="-" value="FILE:GEO">GIS file</option>
-			<option show="-" value="FILE:RASTER">GIS RASTER file</option>
-			<option show="y" value="WWW:LINK-1.0-http--ical">iCalendar (URL)</option>
-			<option show="y" value="WWW:LINK-1.0-http--link">Web address (URL)</option>
-			<option show="y" value="WWW:LINK-1.0-http--partners">Partner web address (URL)</option>
-			<option show="y" value="WWW:LINK-1.0-http--related">Related link (URL)</option>
-			<option show="y" value="WWW:LINK-1.0-http--rss">RSS News feed (URL)</option>
-			<option show="y" value="WWW:LINK-1.0-http--samples">Showcase product (URL)</option>
-			<option show="-" value="DB:POSTGIS">PostGIS database table</option>
-			<option show="-" value="DB:ORACLE">ORACLE database table</option>
-			<option show="y" value="WWW:LINK-1.0-http--opendap">OPeNDAP URL</option>
-			<option show="y" value="RBNB:DATATURBINE">Data Turbine</option>
-			<option show="-" value="UKST">Unknown Service Type</option>
-			<!-- Add these for MCP -->
-			<option show="y" value="WWW:DOWNLOAD-1.0-http--downloaddata">Data file for download</option>
-			<option show="y" value="WWW:LINK-1.0-http--downloaddata">Data file for download</option>
-			<option show="y" value="WWW:DOWNLOAD-1.0-http--csiro-oa-app">CSIRO Oceans and Atmosphere Data Delivery Application</option>
+    <helper sort="true">
+      <option show="y" value="WWW:DOWNLOAD-1.0-http--csiro-oa-app">CSIRO Oceans and Atmosphere Data Delivery Application</option>
+      <option show="y" value="WWW:LINK-1.0-http--downloaddata">Web link (URL) to other data</option>
+      <option show="y" value="OGC:WMS-1.3.0-http-get-map">OGC-WMS Web Map Service</option>
+      <option show="y" value="WWW:DOWNLOAD-1.0-http--csiro-dap">HTTP Link to resource in CSIRO DAP</option>
+      <option show="y" value="WWW:LINK-1.0-http--link">Web link (URL) - use this if one of the above does not apply</option>
+    </helper>
+	</element>
+	<!-- ==================================================== -->
+	<element name="gmd:name" context="gmd:MD_Format" id="285.0">
+	  <label>Name</label>
+		<description>Name of the data transfer format(s)</description>
+		<help>
+			<![CDATA[<p>Please select the <b>most appropriate</b> format or if not known then please select <b>'not yet ascertained'</b>.</p>]]>
+		</help>
+		<condition>mandatory</condition>
+		<helper rel="gmd:version">
+			<option value="not yet ascertained">not yet ascertained</option>
+			<option value="DIGITAL - Binary">DIGITAL - Binary</option>
+			<option value="DIGITAL - CAD - DXF">DIGITAL - CAD - DXF</option>
+			<option value="DIGITAL - CAD - Design">DIGITAL - CAD - Design</option>
+			<option value="DIGITAL - Database Files - MS Access">DIGITAL - Database Files - MS Access</option>
+			<option value="DIGITAL - Database Files - Oracle">DIGITAL - Database Files - Oracle</option>
+			<option value="DIGITAL - Database Files - Texpress">DIGITAL - Database Files - Texpress</option>
+			<option value="DIGITAL - Database Files - other">DIGITAL - Database Files - other</option>
+			<option value="DIGITAL - GIS - AS2482">DIGITAL - GIS - AS2482</option>
+			<option value="DIGITAL - GIS - ArcSDE export">DIGITAL - GIS - ArcSDE export</option>
+			<option value="DIGITAL - GIS - ArcSDE raster">DIGITAL - GIS - ArcSDE raster</option>
+			<option value="DIGITAL - GIS - ArcSDE vector">DIGITAL - GIS - ArcSDE vector</option>
+			<option value="DIGITAL - GIS - ERDAS">DIGITAL - GIS - ERDAS</option>
+			<option value="DIGITAL - GIS - ESRI Arc Map Project">DIGITAL - GIS - ESRI Arc Map Project</option>
+			<option value="DIGITAL - GIS - ESRI Coverage">DIGITAL - GIS - ESRI Coverage</option>
+			<option value="DIGITAL - GIS - ESRI Coverage Export">DIGITAL - GIS - ESRI Coverage Export</option>
+			<option value="DIGITAL - GIS - ESRI GRID raster">DIGITAL - GIS - ESRI GRID raster</option>
+			<option value="DIGITAL - GIS - ESRI Personal GeoDatabase">DIGITAL - GIS - ESRI Personal GeoDatabase</option>
+			<option value="DIGITAL - GIS - ESRI Shapefile">DIGITAL - GIS - ESRI Shapefile</option>
+			<option value="DIGITAL - GIS - MapInfo TAB format">DIGITAL - GIS - MapInfo TAB format</option>
+			<option value="DIGITAL - GIS - Geographic Markup Language (GML)">DIGITAL - GIS - Geographic Markup Language (GML)</option>
+			<option value="DIGITAL - GIS - Keyhole Markup Language (KML)">DIGITAL - GIS - Keyhole Markup Language (KML)</option>
+			<option value="DIGITAL - GIS - S.57 ENC">DIGITAL - GIS - S.57 ENC</option>
+			<option value="DIGITAL - GIS - SDTS">DIGITAL - GIS - SDTS</option>
+			<option value="DIGITAL - GIS - other">DIGITAL - GIS - other</option>
+			<option value="DIGITAL - HTML">DIGITAL - HTML</option>
+			<option value="DIGITAL - Images - BIL (DISIMP)">DIGITAL - Images - BIL (DISIMP)</option>
+			<option value="DIGITAL - Images - BMP">DIGITAL - Images - BMP</option>
+			<option value="DIGITAL - Images - ECW">DIGITAL - Images - ECW</option>
+			<option value="DIGITAL - Images - Video">DIGITAL - Images - Video</option>
+			<option value="DIGITAL - Images - EPS">DIGITAL - Images - EPS</option>
+			<option value="DIGITAL - Images - GIF">DIGITAL - Images - GIF</option>
+			<option value="DIGITAL - Images - GeoTIFF">DIGITAL - Images - GeoTIFF</option>
+			<option value="DIGITAL - Images - JPEG">DIGITAL - Images - JPEG</option>
+			<option value="DIGITAL - Images - PBM">DIGITAL - Images - PBM</option>
+			<option value="DIGITAL - Images - PDF">DIGITAL - Images - PDF</option>
+			<option value="DIGITAL - Images - PNG">DIGITAL - Images - PNG</option>
+			<option value="DIGITAL - Images - RNC">DIGITAL - Images - RNC</option>
+			<option value="DIGITAL - Images - TIFF">DIGITAL - Images - TIFF</option>
+			<option value="DIGITAL - Images - other">DIGITAL - Images - other</option>
+			<option value="DIGITAL - OGC Web Map Context (WMC)">DIGITAL - OGC Web Map Context (WMC)</option>
+			<option value="DIGITAL - OGC OWS Context">DIGITAL - OGC OWS Context</option>
+			<option value="DIGITAL - SGML">DIGITAL - SGML</option>
+			<option value="DIGITAL - Spreadsheets - MS Excel">DIGITAL - Spreadsheets - MS Excel</option>
+			<option value="DIGITAL - Spreadsheets - other">DIGITAL - Spreadsheets - other</option>
+			<option value="DIGITAL - Text Documents - ASCII">DIGITAL - Text Documents - ASCII</option>
+			<option value="DIGITAL - Text Documents - MS Word">DIGITAL - Text Documents - MS Word</option>
+			<option value="DIGITAL - Text Documents - RTF">DIGITAL - Text Documents - RTF</option>
+			<option value="DIGITAL - Text Documents - XML">DIGITAL - Text Documents - XML</option>
+			<option value="DIGITAL - Text Documents - other">DIGITAL - Text Documents - other</option>
+			<option value="DIGITAL - MATLAB">DIGITAL - MATLAB</option>
+			<option value="DIGITAL - netCDF">DIGITAL - netCDF</option>
+			<option value="DIGITAL - other">DIGITAL - other</option>
+			<option value="NON-DIGITAL - Drawings">NON-DIGITAL - Drawings</option>
+			<option value="NON-DIGITAL - Field Data Sheets">NON-DIGITAL - Field Data Sheets</option>
+			<option value="NON-DIGITAL - Film (Cine)">NON-DIGITAL - Film (Cine)</option>
+			<option value="NON-DIGITAL - Manuscript">NON-DIGITAL - Manuscript</option>
+			<option value="NON-DIGITAL - Microfiche">NON-DIGITAL - Microfiche</option>
+			<option value="NON-DIGITAL - Microfilm">NON-DIGITAL - Microfilm</option>
+			<option value="NON-DIGITAL - Notebooks">NON-DIGITAL - Notebooks</option>
+			<option value="NON-DIGITAL - Photocopy">NON-DIGITAL - Photocopy</option>
+			<option value="NON-DIGITAL - Photographs (negatives and/or prints)">NON-DIGITAL - Photographs (negatives and/or prints)</option>
+			<option value="NON-DIGITAL - Plotted Maps">NON-DIGITAL - Plotted Maps</option>
+			<option value="NON-DIGITAL - Prepared Specimens - Electron Microscope Mounts">NON-DIGITAL - Prepared Specimens - Electron Microscope Mounts</option>
+			<option value="NON-DIGITAL - Prepared Specimens - Microscope Slides">NON-DIGITAL - Prepared Specimens - Microscope Slides</option>
+			<option value="NON-DIGITAL - Printed Maps">NON-DIGITAL - Printed Maps</option>
+			<option value="NON-DIGITAL - Printed Text (Reports, Books, Reprints, etc.)">NON-DIGITAL - Printed Text (Reports, Books, Reprints, etc.)</option>
+			<option value="NON-DIGITAL - Printouts (Charts, Data, Plotter Output)">NON-DIGITAL - Printouts (Charts, Data, Plotter Output)</option>
+			<option value="NON-DIGITAL - Transparencies">NON-DIGITAL - Transparencies</option>
+			<option value="NON-DIGITAL - Typescript">NON-DIGITAL - Typescript</option>
+			<option value="NON-DIGITAL - Video">NON-DIGITAL - Video</option>
+			<option value="NON-DIGITAL - Vouchered Specimens - Biological">NON-DIGITAL - Vouchered Specimens - Biological</option>
+			<option value="NON-DIGITAL - Vouchered Specimens - Geological">NON-DIGITAL - Vouchered Specimens - Geological</option>
+			<option value="NON-DIGITAL - Vouchered Specimens - other">NON-DIGITAL - Vouchered Specimens - other</option>
+			<option value="NON-DIGITAL - X-Rays (Radiographs)">NON-DIGITAL - X-Rays (Radiographs)</option>
+			<option value="NON-DIGITAL - other">NON-DIGITAL - other</option>
 		</helper>
 	</element>
 </labels>
