@@ -324,7 +324,7 @@ This is a link to an html description of a species name (or higher level ranks) 
 		<description>Individual Name</description>
 	</element>
 	<!-- ==================================================== -->
-	<element name="gmd:protocol" id="398.0">
+	<element name="gmd:protocol" id="398.0" alias="protocol">
 		<label>Protocol</label>
 		<description>Connection protocol to be used</description>
     <helper sort="true">
