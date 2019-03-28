@@ -15,6 +15,7 @@
 
 	<xsl:variable name="metadataStandardName" select="'Australian Marine Community Profile of ISO 19115:2005/19139'"/>
 	<xsl:variable name="metadataStandardVersion" select="'1.5-experimental'"/>
+  <xsl:variable name="apiSiteUrl" select="substring(/root/env/siteURL, 1, string-length(/root/env/siteURL)-4)"/>
 
 	<!-- ================================================================= -->
 	
@@ -613,7 +614,7 @@
 	<xsl:template name="addMetadataURLInternals">
 		<gmd:linkage>
 			<gmd:URL>
-				<xsl:value-of select="concat(/root/env/siteURL,'/metadata.show?uuid=',/root/env/uuid)"/>
+				<xsl:value-of select="concat($apiSiteUrl,'api/records/',/root/env/uuid,'/formatters/xml')"/>
 			</gmd:URL>
 		</gmd:linkage>
 		<gmd:protocol>
