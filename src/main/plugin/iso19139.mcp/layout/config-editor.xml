@@ -69,7 +69,7 @@
             data-filter='{"_root": "mcp:CI_Organisation"}'
             data-insert-modes="xlink"/>
     </for>
-    
+
     <for name="gmd:contact" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
 						data-schema="iso19139.mcp"
@@ -134,7 +134,7 @@
 
       Exclude all thesaurus already used in the metadata:
       -->
-      <directiveAttributes 
+      <directiveAttributes
             data-include="xpath::string-join(mcp:MD_Metadata/gmd:identificationInfo//gmd:thesaurusName/*/gmd:identifier/*/gmd:code/gmx:Anchor/concat('-', substring-after(text()[. != ''], 'geonetwork.thesaurus.')), ',')"
             data-allow-free-text-keywords="false"/>
     </for>
@@ -196,7 +196,7 @@
       <name>gmd:abstract</name>
     </expanded>
     <!-- All fields in ISO could be multilingual.
-    Define element to exlcude. 
+    Define element to exlcude.
     TODO: it may be relevant to have parent defined
     to restrict the list.
     -->
@@ -270,9 +270,9 @@
                    data-lang="lang"/>
         <!-- <directive data-gn-validation-report=""/> -->
         <!-- <directive data-gn-suggestion-list=""/> -->
-        <!-- relative docUrl in gnGlobalSettings which is set to
-             https://confluence.csiro.au/display/DataCentreShared/ -->
-        <directive data-gn-need-help="MARLIN+Help-+Editing"/>
+        <!-- relative csiroDocUrl in gnGlobalSettings which is set to
+             https://confluence.csiro.au/pages/viewpage.action? -->
+        <directive data-gn-need-help="pageId=252711796" data-csiro="true"/>
       </sidePanel>
 			<tab id="resourceCitation" default="true" mode="flat">
 				<section name=" ">
@@ -306,7 +306,7 @@
 				<section name=" ">
           <field xpath="/mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification/gmd:pointOfContact" notDisplayedIfMissing="true"/>
           <field xpath="/mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification/mcp:resourceContactInfo" in="/mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification"/>
-					<!-- always display an add action that will add a new 
+					<!-- always display an add action that will add a new
 					     resourceContactInfo block with just the role and
 							 party in it -->
           <action type="add" name="resourceContactInfo" or="resourceContactInfo" if="true()" in="/mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification">
@@ -325,7 +325,7 @@
 
           <field xpath="/mcp:MD_Metadata/gmd:contact" notDisplayedIfMissing="true"/>
           <field xpath="/mcp:MD_Metadata/mcp:metadataContactInfo" in="/mcp:MD_Metadata"/>
-					<!-- always display an add action that will add a new 
+					<!-- always display an add action that will add a new
 					     metadataContactInfo block with just the role and
 							 party in it -->
 							 <!--
@@ -411,7 +411,7 @@
           <field xpath="/mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification/gmd:resourceConstraints" or="resourceConstraints" in="/mcp:MD_Metadata/gmd:identificationInfo/mcp:MD_DataIdentification"/>
 				</section>
 			</tab>
-				
+
 				<!--
 			<tab id="dataParameters" mode="flat">
 				<section name=" ">
@@ -419,7 +419,7 @@
 				</section>
 			</tab>
 			-->
-			
+
 			<tab id="resourceLineageTab" mode="flat">
         <section name="gmd:lineage">
           <field name="lineage"
@@ -450,7 +450,7 @@
           </action>
 				</section>
 			</tab>
-			
+
 			<tab id="dataQualityInfo" mode="flat">
         <section name=" ">
 
@@ -717,8 +717,8 @@
           <field xpath="/mcp:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine[gmd:CI_OnlineResource/gmd:protocol/gco:CharacterString!='WWW:LINK-1.0-http--metadata-URL']" in="/mcp:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions"/>
 				</section>
       </tab>
-      
-      <!-- Elements that should not use the "flat" mode --> 
+
+      <!-- Elements that should not use the "flat" mode -->
       <flatModeExceptions>
         <for name="gmd:descriptiveKeywords" />
 				<for name="mcp:party"/>
